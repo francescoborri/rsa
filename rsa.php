@@ -24,11 +24,11 @@ $b = ($p - 1) * ($q - 1);
 echo "b: $b". PHP_EOL;
 
 $e = 2;
-while (gcd($e, $b) != 1) $e++;
+for (; gcd($e, $b) != 1; $e++);
 
 echo "e: $e". PHP_EOL;
 
 $d = 2;
-while (($d * $e) % $b != 1) $d++;
+for (; ($d * $e) % $b != 1; $d++);
 
 echo "d: $d". PHP_EOL;
