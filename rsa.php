@@ -15,8 +15,8 @@ function generate()
 {
     $primes = [2, 3, 5, 7, 11, 13, 17];
 
-    $p = 5;
-    $q = 11;
+    $p = 0;
+    $q = 0;
 
     while ($p == $q) {
         $p = $primes[rand(0, count($primes) - 1)];
@@ -37,16 +37,18 @@ function generate()
 
 $action = $_POST['action'];
 
-if ($action == 'generate') {
+if ($action == 'generate' || (($action == 'crypt' || $action == 'decrypt') && (!isset($_SESSION['public_key']) || !isset($_SESSION['private_key'])))) {
     $keys = generate();
 
     $_SESSION['public_key'] = array_slice($keys, 0, 2);
     $_SESSION['private_key'] = $keys[2];
 
     unset($_SESSION['message']);
-} else if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
+}
+
+if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
     $message = str_split($_POST['tocrypt']);
-    $encrypted = '';
+        $encrypted = '';
 
     foreach ($message as $char) 
         $encrypted .= chr(pow(ord($char), $_SESSION['public_key'][1]) % $_SESSION['public_key'][0]);

@@ -24,7 +24,7 @@ $private_key = isset($_SESSION['private_key']) ? $_SESSION['private_key'] : '';
 						<h1 class="display-4 text-center">Algoritmo RSA</h1>
 					</div>
 					<div class="col-auto mx-md-0 mx-3">
-						<ul class="list-group">
+						<ul class="list-group shadow">
 							<li class="list-group-item">
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -57,7 +57,7 @@ $private_key = isset($_SESSION['private_key']) ? $_SESSION['private_key'] : '';
 		</div>
 		<div class="row justify-content-center mb-3">
 			<div class="col">
-				<div class="input-group">
+				<div class="input-group shadow">
 					<div class="input-group-prepend">
 						<button type="submit" class="btn btn-primary" form="rsa-actions" name="action" value="generate">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shuffle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +72,7 @@ $private_key = isset($_SESSION['private_key']) ? $_SESSION['private_key'] : '';
 		</div>
 		<div class="row justify-content-center mb-3">
 			<div class="col">
-				<div class="input-group">
+				<div class="input-group shadow">
 					<div class="input-group-prepend">
 						<button type="submit" class="btn btn-primary" form="rsa-actions" name="action" value="crypt">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +86,7 @@ $private_key = isset($_SESSION['private_key']) ? $_SESSION['private_key'] : '';
 		</div>
 		<div class="row justify-content-center mb-3">
 			<div class="col">
-				<div class="input-group">
+				<div class="input-group shadow">
 					<div class="input-group-prepend">
 						<button type="submit" class="btn btn-primary" form="rsa-actions" name="action" value="decrypt">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
