@@ -48,19 +48,25 @@ if ($action == 'generate' || (($action == 'crypt' || $action == 'decrypt') && (!
 
 if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
     $message = str_split($_POST['tocrypt']);
-        $encrypted = '';
+    $encrypted = '';
 
-    foreach ($message as $char) 
-        $encrypted .= chr(pow(ord($char), $_SESSION['public_key'][1]) % $_SESSION['public_key'][0]);
+    foreach ($message as $char) {
+        $tmp = gmp_intval(gmp_mod(gmp_pow(ord($char), $_SESSION['public_key'][1]), $_SESSION['public_key'][0]));
+        echo $tmp . PHP_EOL;
+        $encrypted .= chr($tmp);
+    }
 
     $_SESSION['message'] = $encrypted;
 } else if ($action == 'decrypt' && isset($_POST['todecrypt']) && $_POST['todecrypt'] != '') {
     $message = str_split($_POST['todecrypt']);
     $decrypted = '';
 
-    foreach ($message as $char)
-        $decrypted .= chr(pow(ord($char), $_SESSION['private_key']) % $_SESSION['public_key'][0]);
+    foreach ($message as $char) {
+        $tmp = gmp_intval(gmp_mod(gmp_pow(ord($char), $_SESSION['private_key']), $_SESSION['public_key'][0]));
+        echo $tmp . PHP_EOL;
+        $decrypted .= chr($tmp);
+    }
 
     $_SESSION['message'] = $decrypted;
 }
-header('location: ./');
+//header('location: ./');
