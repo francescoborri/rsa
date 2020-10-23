@@ -15,8 +15,8 @@ function generate()
 {
     $primes = [2, 3, 5, 7, 11, 13, 17];
 
-    $p = 0;
-    $q = 0;
+    $p = 5;
+    $q = 11;
 
     while ($p == $q) {
         $p = $primes[rand(0, count($primes) - 1)];
@@ -27,7 +27,7 @@ function generate()
     $b = ($p - 1) * ($q - 1);
 
     $e = 2;
-    while (gcd($e, $b) != 1) $e++;
+    while ($e > $b ? gcd($e, $b) : gcd($b, $e) != 1) $e++;
 
     $d = 2;
     while (($d * $e) % $b != 1) $d++;
@@ -38,7 +38,27 @@ function generate()
 $action = $_POST['action'];
 
 if ($action == 'generate') {
-} else if ($action == 'crypt') {
-} else if ($action == 'decrypt') {
-} else
-    header('location: ./');
+    $keys = generate();
+
+    $_SESSION['public_key'] = array_slice($keys, 0, 2);
+    $_SESSION['private_key'] = $keys[2];
+
+    unset($_SESSION['message']);
+} else if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
+    $message = str_split($_POST['tocrypt']);
+    $encrypted = '';
+
+    foreach ($message as $char) 
+        $encrypted .= chr(pow(ord($char), $_SESSION['public_key'][1]) % $_SESSION['public_key'][0]);
+
+    $_SESSION['message'] = $encrypted;
+} else if ($action == 'decrypt' && isset($_POST['todecrypt']) && $_POST['todecrypt'] != '') {
+    $message = str_split($_POST['todecrypt']);
+    $decrypted = '';
+
+    foreach ($message as $char)
+        $decrypted .= chr(pow(ord($char), $_SESSION['private_key']) % $_SESSION['public_key'][0]);
+
+    $_SESSION['message'] = $decrypted;
+}
+header('location: ./');

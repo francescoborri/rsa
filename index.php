@@ -1,10 +1,8 @@
 <?php
 session_start();
-
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : '';
-$public_key = isset($_SESSION['public-key']) ? $_SESSION['public-key'] : NULL;
-$private_key = isset($_SESSION['private-key']) ? $_SESSION['private-key'] : '';
-
+$public_key = isset($_SESSION['public_key']) ? $_SESSION['public_key'] : NULL;
+$private_key = isset($_SESSION['private_key']) ? $_SESSION['private_key'] : '';
 ?>
 <!doctype html>
 <html>
@@ -101,7 +99,7 @@ $private_key = isset($_SESSION['private-key']) ? $_SESSION['private-key'] : '';
 			</div>
 		</div>
 	</div>
-	<form action="rsa.php" id="rsa-actions" method="GET" class="d-none"></form>
+	<form action="rsa.php" id="rsa-actions" method="POST" class="d-none"></form>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
