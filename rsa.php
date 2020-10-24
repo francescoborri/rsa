@@ -70,8 +70,8 @@ if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
     $encrypted = '';
 
     foreach ($message as $char)
-        $encrypted = mb_chr(gmp_intval(gmp_mod(gmp_pow(mb_ord($char), $_SESSION['public_key'][1]), $_SESSION['public_key'][0])));
-
+        $encrypted .= mb_chr(gmp_intval(gmp_mod(gmp_pow(mb_ord($char), $_SESSION['public_key'][1]), $_SESSION['public_key'][0])));
+    
     $_SESSION['message'] = base64_encode($encrypted);
 } else if ($action == 'decrypt' && isset($_POST['todecrypt']) && $_POST['todecrypt'] != '') {
 
@@ -79,8 +79,8 @@ if ($action == 'crypt' && isset($_POST['tocrypt']) && $_POST['tocrypt'] != '') {
     $decrypted = '';
 
     foreach ($message as $char)
-        $decrypted = mb_chr(gmp_intval(gmp_mod(gmp_pow(mb_ord($char), $_SESSION['private_key'][1]), $_SESSION['public_key'][0])));
+        $decrypted .= mb_chr(gmp_intval(gmp_mod(gmp_pow(mb_ord($char), $_SESSION['private_key'][1]), $_SESSION['public_key'][0])));
 
     $_SESSION['message'] = $decrypted;
 }
-//header('location: ./');
+header('location: ./');
