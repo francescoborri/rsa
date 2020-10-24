@@ -30,10 +30,10 @@ function get_primes($n)
 
 function generate()
 {
-    $primes = get_primes(100);
+    $primes = get_primes(100); 
 
-    $p = 7;
-    $q = 17;
+    $p = 0;
+    $q = 0;
 
     while ($p == $q || $p * $q < 256) {
         $p = $primes[rand(0, count($primes) - 1)];
