@@ -46,8 +46,9 @@ function generate()
     $e = 2;
     while (gmp_gcd($b, $e) != 1) $e++;
 
-    $d = 2;
-    while (($d * $e) % $b != 1) $d++;
+    //$d = 2;
+    //while (($d * $e) % $b != 1) $d++;
+    $d = gmp_intval(gmp_invert($e, $b));
 
     return [$N, $e, $d];
 }
